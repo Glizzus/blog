@@ -1,10 +1,36 @@
 ---
 import Head from '../components/Head.astro';
+import '../styles/global.css';
 import { SITE_TITLE } from '../consts'
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => 
+	a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+
 ---
 
 <html lang="en">
 	<Head title={SITE_TITLE} />
 	<body>
+		<h1>Da Crosby Code</h1>
+		<ul>
+			{
+				sortedPosts.map((post) => (
+					<li>
+						<a href={`/blog/${post.slug}`}>{post.slug}</a>
+					</li>
+				))
+			}
+		</ul>
 	</body>
 </html>
+
+<style>
+	body {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+</style>

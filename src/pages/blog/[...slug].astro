@@ -1,5 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { SITE_TITLE } from '../../consts';
+import Head from '../../components/Head.astro';
 import '../../styles/global.css'
 
 export async function getStaticPaths() {
@@ -17,23 +19,35 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { title } = entry.data;
+const { title, description } = entry.data;
 const { Content } = await entry.render();
 
 ---
-<h1>{title}</h1>
+<Head title={SITE_TITLE} />
 <article>
-    <Content />
+    <h1>{title}</h1>
+    <p>{description}</p>
+    <div>
+        <Content />
+    </div>
 </article>
 
-<style>
+<style is:global>
     article {
-        margin: 40px auto;
+        max-width: 60%;
+        margin: 0 auto;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    @import "~@fontsource/lato/400.css";
+    article img {
+        max-width: 100%;
+    }
 
-    body {
-        font-family: 'Lato'
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
     }
 </style>
