@@ -6,7 +6,7 @@ pubDate: 06/11/2024
 
 ## Introduction
 
-Dev Containers is an open specification that allows for a reproducible,
+[Dev Containers](https://containers.dev/) is an open specification that allows for a reproducible,
 containerized development environment using Docker.
 It was originally developed for Visual Studio Code, but later
 expanded to allow for multiple implementations.
@@ -59,7 +59,9 @@ These are the necessary steps to develop this application on your host machine.
 2. Install Node.js
 
     ```bash
-    nvm install <node_version>
+    export NODE_VERSION='<insert whatever Node version you need>'
+    nvm install "$NODE_VERSION"
+    nvm use "$NODE_VERSION"
     ```
 
 3. Install dependencies
@@ -78,8 +80,8 @@ That's it. We are running the application. Node Version Manager is isolating the
 version for us, and `node_modules` is isolating our dependencies from other projects. There is nothing
 more that Dev Containers can do for us here. For this application, I would not recommend Dev Containers.
 
-For another application, however, you may require that they connect to MongoDB, MySQL, Redis,
-or some other external purpose. This is the perfect use case for Dev Containers!
+For another application, however, such as a REST API, you will probably be required to connect to MongoDB, MySQL, Redis,
+or some other external program. This is the perfect use case for Dev Containers!
 
 ### Entire Team is Proficient in the Technology
 
@@ -104,4 +106,8 @@ than good.
 
 ## Conclusion
 
-Dev Containers can make lives easier, but only when necessary.
+Dev Containers can make lives easier, but only when necessary. Implementing them
+can greatly ease the onboarding process and make the application more accessible,
+but they can also make the development process more restrictive or unnecessary complex.
+
+If you consider the above reasons, and are still leaning towards Dev Containers, I highly recommend them.

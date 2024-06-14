@@ -1,32 +1,21 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
 @import "@fontsource/lato";
 
 :root {
-	--primary: #fcfcfc;
+	--primary: #f4f4f4;
 	--secondary: #303030;
 	--accent: #1d63ed;
-	--light-gray: #ececec;
 }
 
 body {
 	font-family: 'Lato', sans-serif;
-	margin: 0;
-	padding: 0;
-
-	font-size: 1.1em;
-	line-height: 1.4;
+	line-height: 1.6;
 	background-color: var(--primary);
 	color: var(--secondary);
+	margin: 0;
+	padding: 0;
 }
 
-:not(pre) > code {
-	background-color: var(--light-gray);
-}
-
-pre {
-	padding: 1%;
+pre code {
+	display: block;
+	padding: 1em;
 }
