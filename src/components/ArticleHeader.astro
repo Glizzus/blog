@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type Props = CollectionEntry<"blog">["data"];
+
+const { title, description, pubDate, updatedDate } = Astro.props;
+---
+
+<h1>{title}</h1>
+<p class="description">{description}</p>
+<div class="date-container">
+    <p class="date">
+        <span class="date-label">Published</span>
+        <time datetime={pubDate.toISOString()}
+            >{new Date(pubDate).toLocaleDateString()}</time
+        >
+    </p>
+    {
+        (() => {
+            if (updatedDate !== undefined) {
+                return (
+                    <p class="date">
+                        <span class="date-label">Updated</span>
+                        <time datetime={updatedDate.toISOString()}>
+                            {new Date(updatedDate).toLocaleDateString()}
+                        </time>
+                    </p>
+                );
+            }
+        })()
+    }
+</div>
+
+<style>
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h1, .description {
+        margin: 0;
+    }
+
+    .description {
+        font-size: 1.5rem;
+    }
+
+    .description, .date {
+        color: #666;
+    }
+
+    .date {
+        margin: 0.25rem auto;
+    }
+
+    time {
+        font-style: italic;
+    }
+</style>

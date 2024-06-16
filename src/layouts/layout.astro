@@ -1,12 +1,12 @@
 ---
 import Head from '../components/Head.astro';
-import Header from '../components/Header.astro';
+import PageHeader from '../components/PageHeader.astro';
 import { SITE_TITLE } from '../consts';
 
 ---
 <html lang="en">
 	<Head title={SITE_TITLE} />
-    <Header />
+    <PageHeader />
     <body>
         <slot />
     </body>

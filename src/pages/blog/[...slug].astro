@@ -1,45 +1,63 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
-import Layout from '../../layouts/layout.astro';
-import '../../styles/global.css'
+import { getCollection, type CollectionEntry } from "astro:content";
+import ArticleHeader from "../../components/ArticleHeader.astro";
+import Layout from "../../layouts/layout.astro";
+import "../../styles/global.css";
 
 export async function getStaticPaths() {
-    const entries = await getCollection('blog');
+    const entries = await getCollection("blog");
     return entries.map((entry) => ({
         params: {
             slug: entry.slug,
         },
-        props: { entry }
-    })); 
+        props: { entry },
+    }));
 }
 
 interface Props {
-    entry: CollectionEntry<'blog'>;
+    entry: CollectionEntry<"blog">;
 }
 
 const { entry } = Astro.props;
-const { title, description } = entry.data;
+const { title, description, pubDate, updatedDate } = entry.data;
 const { Content } = await entry.render();
-
 ---
+
 <Layout>
     <article>
-        <h1>{title}</h1>
-        <p class="description">{description}</p>
-        <div>
-            <Content />
-        </div>
+        <ArticleHeader
+            title={title}
+            description={description}
+            pubDate={pubDate}
+            updatedDate={updatedDate} 
+        />
+        <Content />
     </article>
 </Layout>
 
 <style is:global>
     article {
         max-width: 60%;
+        /* The following margin centers the article on the page */
         margin: 2rem auto;
-        padding: 2rem;
-        background: white;
+        padding: 1rem;
+        background: #fff;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media screen and (max-width: 768px) {
+        article {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+    }
+
+    /* Reset the margins that were created by Flexbox */
+    article > * {
+        margin: 0rem;
     }
 
     article img {
@@ -47,35 +65,26 @@ const { Content } = await entry.render();
         height: auto;
     }
 
-    article h1 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-        text-align: center
-    }
-
-    p {
-        font-size: 1.25rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .description {
-        text-align: center;
-        color: #666;
-    }
-
     h2 {
         font-size: 2rem;
-        margin-top: 3rem;
-        margin-bottom: 1rem;
+        margin: 1rem 0;
         border-bottom: 2px solid #ccc;
-        padding-bottom: 0.5rem;
     }
 
     h3 {
         font-size: 1.75rem;
-        margin-top: 1.5rem;
+        margin: 1rem 0;
         margin-bottom: 0.75rem;
         color: #555;
+    }
+
+    ol, p {
+        font-size: 1.25rem;
+        margin-bottom: 1.25rem;
+    }
+
+    ol {
+        
     }
 
     a {
@@ -86,4 +95,5 @@ const { Content } = await entry.render();
     a:hover {
         text-decoration: underline;
     }
+
 </style>

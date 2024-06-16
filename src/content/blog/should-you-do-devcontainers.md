@@ -2,6 +2,7 @@
 title: Are Dev Containers Right for you?
 description: Dev Containers have benefits, but they aren't for everyone.
 pubDate: 06/11/2024
+updatedDate: 06/16/2024
 ---
 
 ## Introduction
@@ -16,7 +17,7 @@ and everything else we love about Docker to design and share development environ
 
 ## Flowchart Overview
 
-| ![Flowchart visualizing when to use Dev Containers](./when-to-devcontainer.png) |
+| ![Flowchart visualizing when to use Dev Containers](./when-to-use-devcontainers.drawio.png) |
 |:-:|
 |A flowchart to aid in deciding whether Dev Containers are right for you|
 
@@ -59,9 +60,8 @@ These are the necessary steps to develop this application on your host machine.
 2. Install Node.js
 
     ```bash
-    export NODE_VERSION='<insert whatever Node version you need>'
-    nvm install "$NODE_VERSION"
-    nvm use "$NODE_VERSION"
+    nvm install 20.14.0
+    nvm use 20.14.0
     ```
 
 3. Install dependencies
