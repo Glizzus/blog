@@ -1,8 +1,25 @@
 ---
-import '../styles/global.css';
 import Layout from '../layouts/layout.astro';
+
 ---
 
-<Layout title="Home">
-  <p>This is a work in progress. Check back soon!</p>
+<Layout>
+  <article>
+    <p>I'm Cal Crosby, a senior in Computer Science at Auburn University, and an intern at COLSA Corporation.</p>
+    <p>I'm mainly a backend developer / DevOps person at work, but in my freetime, I try to learn a bit of everything.</p>
+    <p>This blog is my first foray into the world of web development, and I'm excited to see where it goes.</p>
+  </article>
 </Layout>
+
+<style>
+  article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  p {
+    max-width: 600px;
+    margin: 1rem;
+  }
+</style>

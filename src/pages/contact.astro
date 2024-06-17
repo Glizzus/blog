@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/layout.astro'
+
+const email = 'calcrosbydev@outlook.com'
+const githubUrl = 'https://github.com/glizzus'
+---
+
+<Layout>
+    <section>
+        <h2>Contact Me</h2>
+            <p>You can reach me through the following platforms:</p>
+            <ul>
+                <li>
+                    <a href=`mailto:${email}`>{email}</a>
+                </li>
+                <li>
+                    <a href={githubUrl}>GitHub</a>
+                </li>
+            </ul>
+    </section>
+</Layout>
+
+<style>
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+</style>

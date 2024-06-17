@@ -19,3 +19,8 @@ pre code {
 	padding: 1em;
 	white-space: pre-wrap;
 }
+
+a {
+	color : var(--accent);
+	text-decoration: none;
+}

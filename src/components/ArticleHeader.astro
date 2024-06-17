@@ -1,7 +1,7 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import type { CollectionEntry } from 'astro:content'
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<'blog'>['data']
 
 const { title, description, pubDate, updatedDate } = Astro.props;
 ---
@@ -17,16 +17,16 @@ const { title, description, pubDate, updatedDate } = Astro.props;
     </p>
     {
         (() => {
-            if (updatedDate !== undefined) {
-                return (
+          if (updatedDate !== undefined) {
+            return (
                     <p class="date">
                         <span class="date-label">Updated</span>
                         <time datetime={updatedDate.toISOString()}>
                             {new Date(updatedDate).toLocaleDateString()}
                         </time>
                     </p>
-                );
-            }
+            )
+          }
         })()
     }
 </div>

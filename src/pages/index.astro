@@ -1,52 +1,52 @@
 ---
-import '../styles/global.css';
-import Layout from '../layouts/layout.astro';
-import { getCollection } from 'astro:content';
+import Layout from '../layouts/layout.astro'
+import PostThumbnail from '../components/PostThumbnail.astro'
+import { getCollection } from 'astro:content'
 
-const posts = await getCollection('blog');
-const sortedPosts = posts.sort((a, b) => 
-	a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+const posts = await getCollection('blog')
+const sortedPosts = posts.sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
 );
 ---
+
 <Layout>
-	<ul class="grid-container">
-		{
-			sortedPosts.map((post) => (
-				<li class="grid-item">
-					<a href={`/blog/${post.slug}`}>{post.data.title}</a>
-				</li>
-			))
-		}
-	</ul>
+    <ul class="grid-container">
+        {
+            sortedPosts.map(({ slug, data }) => (
+            <li>
+                <PostThumbnail slug={slug} post={data} />
+            </li>
+            ))
+        }
+    </ul>
 </Layout>
 
 <style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 
-.grid-container {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	gap: 16px;
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
+    .grid-item {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 16px;
+        text-align: center;
+        transition: transform 0.2s;
+    }
 
-.grid-item {
-	background-color: #f0f0f0;
-	border: 1px solid #ccc;
-	border-radius: 8px;
-	padding: 16px;
-	text-align: center;
-	transition: transform 0.2s;
-}
+    .grid-item:hover {
+        transform: scale(1.05);
+    }
 
-.grid-item:hover {
-	transform: scale(1.05);
-}
-
-.grid-item a {
-	text-decoration: none;
-	color: #333;
-	font-size: 1.2em;
-}
+    .grid-item a {
+        text-decoration: none;
+        color: #333;
+        font-size: 1.2em;
+    }
 </style>

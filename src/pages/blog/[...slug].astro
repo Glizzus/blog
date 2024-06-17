@@ -1,25 +1,25 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
-import ArticleHeader from "../../components/ArticleHeader.astro";
-import Layout from "../../layouts/layout.astro";
-import "../../styles/global.css";
+import { getCollection, type CollectionEntry } from 'astro:content'
+import { type GetStaticPathsResult } from 'astro'
+import ArticleHeader from '../../components/ArticleHeader.astro'
+import Layout from '../../layouts/layout.astro'
 
-export async function getStaticPaths() {
-    const entries = await getCollection("blog");
-    return entries.map((entry) => ({
-        params: {
-            slug: entry.slug,
-        },
-        props: { entry },
-    }));
+export async function getStaticPaths (): Promise<GetStaticPathsResult> {
+  const entries = await getCollection('blog')
+  return entries.map((entry) => ({
+    params: {
+      slug: entry.slug
+    },
+    props: { entry }
+  }))
 }
 
 interface Props {
-    entry: CollectionEntry<"blog">;
+  entry: CollectionEntry<'blog'>
 }
 
-const { entry } = Astro.props;
-const { title, description, pubDate, updatedDate } = entry.data;
+const { entry } = Astro.props
+const { title, description, pubDate, updatedDate } = entry.data
 const { Content } = await entry.render();
 ---
 
@@ -29,7 +29,7 @@ const { Content } = await entry.render();
             title={title}
             description={description}
             pubDate={pubDate}
-            updatedDate={updatedDate} 
+            updatedDate={updatedDate}
         />
         <Content />
     </article>
@@ -84,7 +84,7 @@ const { Content } = await entry.render();
     }
 
     ol {
-        
+
     }
 
     a {

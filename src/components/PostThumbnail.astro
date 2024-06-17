@@ -1,0 +1,30 @@
+---
+import { type CollectionEntry } from 'astro:content'
+interface Props {
+  slug: string
+  post: CollectionEntry<'blog'>['data']
+}
+
+const {
+  slug,
+  post: { title, pubDate, updatedDate }
+} = Astro.props;
+---
+
+<a href={`/blog/${slug}`}>
+    <h2>{title}</h2>
+</a>
+<p>
+    <time datetime={pubDate.toISOString()}>
+        {pubDate.toLocaleDateString()}
+    </time>
+</p>
+{
+    updatedDate !== undefined && (
+        <p>
+            <time datetime={updatedDate.toISOString()}>
+                Updated: {updatedDate.toLocaleDateString()}
+            </time>
+        </p>
+    )
+}
