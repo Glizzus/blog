@@ -2,7 +2,7 @@
 title: Are Dev Containers Right for you?
 description: Dev Containers have benefits, but they aren't for everyone.
 pubDate: 06/11/2024
-updatedDate: 06/16/2024
+updatedDate: 06/17/2024
 ---
 
 ## Introduction

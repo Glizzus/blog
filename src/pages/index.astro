@@ -14,7 +14,9 @@ const sortedPosts = posts.sort(
         {
             sortedPosts.map(({ slug, data }) => (
             <li>
-                <PostThumbnail slug={slug} post={data} />
+                <a href={`/blog/${slug}`}>
+                    <PostThumbnail slug={slug} post={data} />
+                </a>
             </li>
             ))
         }
@@ -22,31 +24,20 @@ const sortedPosts = posts.sort(
 </Layout>
 
 <style>
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 16px;
+    ul {
         list-style: none;
         padding: 0;
-        margin: 0;
+        margin: 1rem 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1rem;
     }
 
-    .grid-item {
-        background-color: #f0f0f0;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 16px;
-        text-align: center;
-        transition: transform 0.2s;
+    li {
+        border: 4px solid #eaeaea;
     }
 
-    .grid-item:hover {
-        transform: scale(1.05);
-    }
-
-    .grid-item a {
-        text-decoration: none;
-        color: #333;
-        font-size: 1.2em;
+    a {
+        display: block;
     }
 </style>

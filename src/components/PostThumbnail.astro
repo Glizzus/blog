@@ -6,17 +6,14 @@ interface Props {
 }
 
 const {
-  slug,
   post: { title, pubDate, updatedDate }
 } = Astro.props;
 ---
 
-<a href={`/blog/${slug}`}>
-    <h2>{title}</h2>
-</a>
+<h2>{title}</h2>
 <p>
     <time datetime={pubDate.toISOString()}>
-        {pubDate.toLocaleDateString()}
+        Published: {pubDate.toLocaleDateString()}
     </time>
 </p>
 {
@@ -28,3 +25,13 @@ const {
         </p>
     )
 }
+
+<style>
+    h2, p {
+        margin: 0.5rem;
+    }
+
+    p {
+        color: #666;
+    }
+</style>
