@@ -13,7 +13,13 @@ It was originally developed for Visual Studio Code, but later
 expanded to allow for multiple implementations.
 
 Dev Containers allow you to use Dockerfiles, Docker Compose, Docker Volumes,
-and everything else we love about Docker to design and share development environments
+and everything else we love about Docker to design and share development environments.
+
+They seem appealing at first; Dev Containers should give all of the developers a
+level playing field, and allow you to configure a development environment as code.
+There are drawbacks though; Dev Containers are not the right fit for every team.
+In this post, I will give you some pointers as to whether or not Dev Containers
+are good for your team.
 
 ## Flowchart Overview
 
@@ -24,14 +30,17 @@ and everything else we love about Docker to design and share development environ
 ## Immediate Reasons to use Dev Containers
 
 The only immediate reason to opt for a Dev Container is if you wish to
-support more non-techical users. Perhaps a designer just wants to fire up the application,
-and only wants to inspect or tweak the frontend.
-Maybe a manager wants to see the current site of the application.
-Testers can just start the entire stack, and begin testing.
+support more non-techical users. Here are some scenarios that make Dev Containers valuable:
 
-If this is a scenario that you wish to support, then Dev Containers are worth it.
-Visual Studio Code makes it incredibly easy to get started, and your colleagues will
-have a much easier time using and interacting with the application.
+- A designer wants to run the application locally to assess it or slightly tweak the frontend
+
+- A manager wants to see the state of the application in development
+
+- Testers want their own instance of the application to test against
+
+If you encounter any of these often, then absolutely opt to use or at least support Dev Containers.
+
+If you don't, then Dev Containers may still have a place on your team - continue reading.
 
 ## Reasons not to use Dev Containers
 
@@ -39,8 +48,12 @@ have a much easier time using and interacting with the application.
 
 Dev Containers are subject to virtualization overhead on every OS
 except for Linux. If you have a weak workstation, then you will notice it.
+
 Your intellisense and syntax highlighting will be slow. IDE features will work
 slowly, if at all.
+
+You may convince yourself that it isn't a big deal, but it will erode away at you over
+time and annoy you. There is nothing worse than an annoying dev environment.
 
 A good rule of thumb is that you have should **16 GB RAM** to use Dev Containers.
 
@@ -81,7 +94,7 @@ version for us, and `node_modules` is isolating our dependencies from other proj
 more that Dev Containers can do for us here. For this application, I would not recommend Dev Containers.
 
 For another application, however, such as a REST API, you will probably be required to connect to MongoDB, MySQL, Redis,
-or some other external program. This is the perfect use case for Dev Containers!
+or some other external program. Applications like these are perfect for Dev Containers.
 
 ### Entire Team is Proficient in the Technology
 
