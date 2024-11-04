@@ -5,15 +5,22 @@ interface Props {
 
 const canonicalUrl = new URL(Astro.url, Astro.site)
 const { title } = Astro.props;
+
+const description = "Cal Crosby's blog on web development, DevOps, and tech topics."
 ---
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="revision" content={import.meta.env.REVISION} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalUrl} />
 
     <title>{title}</title>
-    <link rel="canonical" href={canonicalUrl} />
 </head>
