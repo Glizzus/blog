@@ -1,7 +1,8 @@
 ---
-title: Vite Plugins are Powerful and Easier to Write than you Think
-description: Plugins from others can be intimidating and unmaintained. Don't be afraid to write your own.
+title: Vite Plugins are Powerful and you Should Write Your Own
+description: Vite plugins can increase observability, flexibility, and performance in your application. You don't need to rely on third-party plugins - you can write your own in just a few lines of code.
 pubDate: 11/09/2024
+updatedDate: 11/10/2024
 ---
 
 ## Introduction
@@ -75,7 +76,7 @@ export default defineConfig({
 });
 ```
 
-You can now access the commit hash in your application. This is an example of using it in a Vue.js application:
+You can now access the commit hash in your application. This is an example of displaying it in a Vue.js component:
 
 ### App.vue
 
@@ -92,7 +93,9 @@ And this is what it looks like in the browser:
 
 ![Vite Plugin Revision](revision-banner.png)
 
-Don't want to expose it to end users? You can use plugins to inject it into the `<head>`:
+This is great for developers, and open-source projects often expose the revision hash in the UI of the application.
+What if your user base wouldn't care about the revision hash, and only developers need to see it?
+You can use a Vite plugin to inject the revision hash into the HTML `<head>` tag:
 
 ```javascript
 import { execSync } from 'child_process'
@@ -153,7 +156,8 @@ export default defineConfig({
 
 ![Vite Plugin Inject Revision](revision-head-hashed.png)
 
-Developers can then use this double hashed version to internally very that the correct revision is running.
+This way, end users could not reverse-engineer the revision hash from the source code. Developers can still check that the correct
+revision is running by hashing the revision hash themselves:
 
 ```sh
 REVISION=$(git rev-parse --short HEAD)
@@ -163,7 +167,9 @@ echo $REVISION # edf5d57
 echo -n $REVISION | sha256sum
 ```
 
-With just a few lines of code, and no external dependencies, you were able to increase observability in your application, even if you don't expose the revision hash to end users.
+With just a few lines of code, and no external dependencies, you've enhanced the observability of your application
+while optionally keeping sensitiv information private. Vite plugins can give your developers peace of mind,
+and they can easily automate arbitrary tasks in Node.js.
 
 ## Plugin: Random _xkcd_ Comic
 
@@ -197,32 +203,18 @@ export default defineConfig({
     plugins: [
       {
         name: 'vite-plugin-random-xkcd',
-         async transform(code, id) {
-          if (!id.endsWith('vite-plugins-are-powerful.md')) {
-            return;
-          }
-          // Get a random XKCD comic ID
+        async buildStart() {
           const latestRes = await fetch('https://xkcd.com/info.0.json');
           const { num } = await latestRes.json();
           const randomComicId = Math.floor(Math.random() * num) + 1;
 
-          // Fetch the random XKCD comic
           const randomRes = await fetch(`https://xkcd.com/${randomComicId}/info.0.json`);
-          let { img, alt, title } = await randomRes.json();
-          alt = escapeHtml(alt);
-          title = escapeHtml(title);
-          const imageRes = await fetch(img);
-          const buffer = await imageRes.arrayBuffer();
+          const { img } = await randomRes.json();
+          const image = await fetch(img);
+          const buffer = await image.arrayBuffer();
 
-          // Download it locally
           fs.mkdirSync('public/xkcd', { recursive: true });
-          fs.writeFileSync(`public/xkcd/${randomComicId}.png`, Buffer.from(buffer));
-
-          // Craft HTML that references the local image
-          const src = `/xkcd/${randomComicId}.png`;
-          const tag = `<img src='${src}' alt='${alt}' title='${title}' style='max-width: 300px; height: auto; display: block; margin: auto;' />`;
-          return code.replace('<!-- XKCD_RANDOM_COMIC -->', tag);
-          return code;
+          fs.writeFileSync(`public/xkcd/random.png`, Buffer.from(buffer));
         }
       },
     ],
@@ -238,6 +230,5 @@ Vite plugins are powerful and easier to write than you think. You can use them t
 
 Don't be afraid to write your own Vite plugins. They are a great way to extend Vite to fit your needs, and they can be a lot of fun to write.
 
-<!-- Yes, this is dynamic. Don't believe me? Check the source code. -->
-
-<!-- XKCD_RANDOM_COMIC -->
+| ![If you are reading this, then this comic did not load. Shame is brought upon the author.](/xkcd/random.png) |
+|:--:|
