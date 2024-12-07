@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 60 60">
+  <rect x="6" y="6" width="48" height="48" fill="#f4f4f4" />
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-family="Arial, sans-serif" font-size="28.75" fill="#303030" stroke="#1D63ED" stroke-width="0.25">
+    DCC
+  </text>
+</svg>

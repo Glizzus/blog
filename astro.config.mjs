@@ -5,15 +5,6 @@ import fs from 'fs';
 // Fetch the latest Git commit hash
 const commitHash = execSync('git rev-parse --short HEAD').toString().trim();
 
-function escapeHtml(unsafe) {
-  return unsafe
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
 export default defineConfig({
   site: 'https://dacrosbycode.com',
   vite: {
