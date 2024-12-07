@@ -2,7 +2,7 @@
 title: Vite Plugins are Powerful and you Should Write Your Own
 description: Vite plugins can increase observability, flexibility, and performance in your application. You don't need to rely on third-party plugins - you can write your own in just a few lines of code.
 pubDate: 11/09/2024
-updatedDate: 11/10/2024
+updatedDate: 12/07/2024
 ---
 
 ## Introduction
@@ -188,15 +188,6 @@ This blog is written in [Astro](https://astro.build/), which uses Vite under the
 ```javascript
 import { defineConfig } from 'astro/config';
 import fs from 'fs';
-
-function escapeHtml(unsafe) {
-  return unsafe
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
 
 export default defineConfig({
   vite: {
